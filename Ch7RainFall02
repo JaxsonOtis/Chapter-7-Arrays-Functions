@@ -1,11 +1,11 @@
-//Jaxson Otis/Period 2/ This function finds the total, average, highest value and lowest value of the rainfall for the 12 months
+                                                                                                                                                      //Jaxson Otis/Period 2/ This function finds the total, average, highest value and lowest value of the rainfall for the 12 months
 
 #include <iostream>
 
 using namespace std;
 
 //function prototypes
-int GetUserInput(int input[]);
+int GetUserInput(int input[], int SIZE);
 int FindLowest(int input[], int &low, int SIZE);
 int FindHighest(int input[], int &high, int SIZE);
 int FindAverage(int input[], double  &average, int &sum, int SIZE);
@@ -19,7 +19,7 @@ int main()
    int highest=0, lowest=0, sum=0;
    double average=0;
 
-   GetUserInput(input);
+   GetUserInput(input, SIZE);
    FindLowest(input, lowest, SIZE);
    FindHighest(input, highest, SIZE);
    FindAverage(input, average, sum, SIZE);
@@ -29,46 +29,16 @@ int main()
 }
 
 //this function gets the user input.
-int GetUserInput(int input[])
-
+int GetUserInput(int input[], int SIZE)
 {
-    cout << "While entering the Rainfall do not add units!" << endl;
-
-    cout << "January RainFall: " << endl;
-    cin >> input[0];
-
-    cout << "February RainFall: " << endl;
-    cin >> input[1];
-
-    cout << "March RainFall: " << endl;
-    cin >> input[2];
-
-    cout << "April RainFall: " << endl;
-    cin >> input[3];
-
-    cout << "May RainFall: " << endl;
-    cin >> input[4];
-
-    cout << "June RainFall: " << endl;
-    cin >> input[5];
-
-    cout << "July RainFall: " << endl;
-    cin >> input[6];
-
-    cout << "August RainFall: " << endl;
-    cin >> input[7];
-
-    cout << "September RainFall: " << endl;
-    cin >> input[8];
-
-    cout << "October RainFall: " << endl;
-    cin >> input[9];
-
-    cout << "November RainFall: " << endl;
-    cin >> input[10];
-
-    cout << "December RainFall: " << endl;
-    cin >> input[11];
+    int i=0;
+    int num;
+    for (num=1;num < SIZE+1; num++ )
+        {
+            cout << "Month " << num << ":" << endl;
+            cin >> input[i];
+            i++;
+        }
 
    return input[12];
 }
