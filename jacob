@@ -1,7 +1,0 @@
-  int i=0;
-    int num;
-    for (num=1;num < SIZE+1; num++)
-    {
-            cout << "Salsa Type :  " << inputNames[i] << "Number of Jars: " << inputNums[i]
-       i++;
-    }
