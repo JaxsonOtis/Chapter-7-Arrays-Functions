@@ -1,5 +1,5 @@
 ///Jaxson Otis/Period 2/this program reads information from a file and gives a weather report
-
+///need txt file to run
 
 #include <iostream>
 #include <fstream>
