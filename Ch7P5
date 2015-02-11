@@ -1,0 +1,144 @@
+///Jaxson Otis/Period 2/this program reads information from a file and gives a weather report
+
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+///constants
+const int ROWS=3, COLS=30, TYPES=3;
+
+///prototypes
+int fillArray(char weathers[ROWS][COLS]);
+int countData(char weathers[ROWS][COLS],int counts[ROWS][TYPES]);
+int findLargestRainy(int counts[ROWS][TYPES], string &largest);
+int DisplayData(int counts[ROWS][TYPES], string largest);
+
+///this function will determine when each function will execute
+int main()
+{
+    char weathers[ROWS][COLS];
+    int counts[ROWS][TYPES];
+    for(int i=0; i < 3; i++)
+    {
+        for (int j=0; j < 3 ; j++ )
+        {
+            counts[i][j] = 0;
+        }
+    }
+    string largest;
+
+    fillArray(weathers);
+    countData(weathers, counts);
+    findLargestRainy(counts, largest);
+    DisplayData(counts, largest);
+
+    return 0;
+}
+
+///this function will fill the array with values
+int fillArray(char weathers[ROWS][COLS])
+{
+    ifstream myfile;
+    myfile.open("rainorshine.txt");
+
+    if(!myfile.is_open())
+        cout << "Error opening file. \n";
+    else
+    {
+        for(int r = 0; r < ROWS; r++)
+        {
+            for (int c = 0; c < COLS; c++)
+            {
+                myfile >> weathers[r][c];
+            }
+        }
+        myfile.close();
+    }
+
+    return weathers[ROWS][COLS];
+}
+
+///this function finds the amount of rainy, cloudy, and sunny days
+int countData(char weathers[ROWS][COLS],int counts[ROWS][TYPES])
+{
+    for(int r = 0; r < ROWS; r++)
+    {
+        for(int c = 0; c < COLS; c++)
+        {
+
+          if(weathers [r][c] =='R')
+          {
+                counts[r][0]++;
+          }
+
+          if(weathers [r][c] =='S')
+          {
+                counts[r][1]++;
+          }
+
+          if(weathers [r][c] =='C')
+          {
+                counts[r][2]++;
+          }
+            }
+    }
+
+    return counts[ROWS][TYPES];
+}
+
+
+
+///this function is going to find which month had the most amount of rainy days
+int findLargestRainy(int counts[ROWS][TYPES], string &largest)
+{
+        if (counts[0][0] > counts[1][0] && counts[0][0] > counts[2][0])
+        {
+           largest = "June";
+        }
+         else if (counts[1][0] > counts[0][0] && counts[1][0] > counts[2][0])
+        {
+            largest = "July";
+        }
+        else if (counts[2][0] > counts[1][0] && counts[2][0] > counts[0][0])
+        {
+            largest = "August";
+        }
+
+    return 0;
+}
+
+///this function will display the data to the users
+int DisplayData(int counts[ROWS][TYPES], string largest)
+{
+    for (int r=0; r < ROWS;r++)
+    {
+        if (r==0)
+        {
+            cout << "June Data:" << endl;
+            cout << "Rainy: " << counts[r][0] << endl;
+            cout << "Sunny: " << counts[r][1] << endl;
+            cout << "Cloudy: " << counts[r][2] << endl << endl;
+        }
+        else if (r==1)
+        {
+            cout << "July Data:" << endl;
+            cout << "Rainy: " << counts[r][0] << endl;
+            cout << "Sunny: " << counts[r][1] << endl;
+            cout << "Cloudy: " << counts[r][2] << endl << endl;
+        }
+        else if (r==2)
+        {
+            cout << "August Data:" << endl;
+            cout << "Rainy: " << counts[r][0] << endl;
+            cout << "Sunny: " << counts[r][1] << endl;
+            cout << "Cloudy: " << counts[r][2] << endl << endl;
+        }
+
+    }
+    cout << "The month with the largest amount of rainy days was " << largest << "." << endl;
+
+    return 0;
+}
