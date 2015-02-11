@@ -1,0 +1,123 @@
+#include <iostream>
+
+
+using namespace std;
+
+//constants
+const int ROWS=3, COLS=7, totalNumber=21;
+
+//prototypes
+int fillArray(int monkeys[ROWS][COLS]);
+int findAverage(int monkeys[ROWS][COLS] ,double & average);
+int findLowest(int monkeys[ROWS][COLS], int &low);
+int findHighest(int monkeys[ROWS][COLS], int &highest);
+int DisplayData(int monkeys[ROWS][COLS],double average,int highest,int lowest);
+
+///this function decides when each function will execute
+int main()
+{
+    int highest=0, lowest=0;
+    double average=0;
+    int monkeys[ROWS][COLS];
+
+    fillArray(monkeys);
+    findAverage(monkeys, average);
+    findLowest(monkeys, lowest);
+    findHighest(monkeys, highest );
+    DisplayData(monkeys, average, highest, lowest);
+
+
+    return 0;
+}
+
+///this function is where the array will be filled with data from the user
+int fillArray(int monkeys[ROWS][COLS])
+{
+    int i;
+    int r;
+
+    for (r=1;r <= ROWS; r++ )
+    {
+        cout << "Monkey Type " << r << ":" << endl;
+
+    for (i=0;i < COLS; i++)
+    {
+        cin >> monkeys[r][i];
+    }
+
+    }
+
+   return monkeys[ROWS][COLS];
+}
+
+///this function finds the average of the set of numbers
+int findAverage(int monkeys[ROWS][COLS] ,double & average)
+{
+
+    int sum=0;
+    int i;
+    int r;
+
+    for (r=1; r <=ROWS; r++)
+    {
+        for (i=0; i < COLS; i++)
+        {
+            sum += monkeys[r][i];
+        }
+    }
+
+    average = sum / totalNumber;
+    return 0;
+}
+
+///this function will find the lowest number in the set of numbers
+int findLowest(int monkeys[ROWS][COLS], int &lowest)
+{
+    int i=1, r;
+
+    for (r=1; r <= ROWS; r++)
+    {
+
+    lowest = monkeys[r][i];
+
+    for (i = 1; i < COLS; i++)
+    {
+       if (monkeys[r][i] < lowest)
+
+          lowest = monkeys[r][i];
+    }
+
+    }
+    return 0;
+}
+
+///this function will find the highest number in the array
+int findHighest(int monkeys[ROWS][COLS], int &highest)
+{
+    int i=0, r;
+
+    for (r=1; r < ROWS; r++)
+    {
+
+    highest = monkeys[r][i];
+
+    for (i = 1; i < COLS; i++)
+    {
+       if (monkeys[r][i] > highest)
+
+          highest = monkeys[r][i];
+    }
+
+    }
+    return 0;
+}
+
+///this function will display all the data to the user
+int DisplayData(int monkeys[ROWS][COLS],double average,int highest,int lowest)
+{
+    cout << "The average was " << average << " pounds." << endl;
+    cout << "The highest was " << highest << " pounds." << endl;
+    cout << "The lowest was "  << lowest << " pounds." << endl;
+
+    return 0;
+}
