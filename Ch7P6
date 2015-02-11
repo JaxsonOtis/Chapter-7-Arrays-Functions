@@ -1,0 +1,116 @@
+///need txt file to run
+
+
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+///constants
+const int SIZE=12;
+
+///prototypes
+int fillArray(int numbers[]);
+int findLowest(int numbers[], int &low);
+int findHighest(int numbers[], int &high);
+int findAverage(int numbers[], double &average, int sum);
+int displayData(int numbers[],double average,int lowest,int highest);
+
+int main()
+{
+    int numbers[SIZE];
+    int highest=0, lowest=0, sum =0;
+    double average=0;
+
+    fillArray(numbers);
+    findAverage(numbers, average, sum);
+    findLowest(numbers, lowest);
+    findHighest(numbers, highest);
+    displayData(numbers, average, lowest, highest);
+
+    return 0;
+}
+
+//this function will fill the array with a set of numbers
+int fillArray(int numbers[])
+{
+    int line;
+    char filename[50];
+    ifstream myfile;
+    cin.getline(filename, 50);
+    myfile.open(filename);
+
+    if (myfile.is_open())
+    {
+        for (int i=0; i < SIZE; i++)
+        {
+            myfile >> line;
+            numbers[i] = line;
+        }
+    }
+    else
+    {
+    cout << "The file was unable to be accessed at the time. Please try again later." << endl;
+    return 0;
+    }
+    myfile.close();
+
+    return numbers[SIZE];
+}
+
+///this function gets the average in the array.
+int findAverage(int numbers[], double &average, int sum)
+{
+    int tnum;
+
+	for(tnum = 0; tnum < SIZE; tnum++)
+        sum += numbers[tnum];
+
+	average = sum / SIZE;
+
+	return 0;
+}
+
+///this function gets the lowest value in the array.
+int findLowest(int numbers[], int &low)
+{
+    int countera;
+
+    low = numbers[0];
+    for (countera = 1; countera < SIZE; countera++)
+    {
+       if (numbers[countera] < low)
+          low = numbers[countera];
+    }
+    return 0;
+}
+
+///this function gets the highest value in the array.
+int findHighest(int numbers[], int &high)
+{
+    int counterb;
+
+    high = numbers[0];
+    for (counterb = 1; counterb < SIZE; counterb++)
+    {
+       if (numbers[counterb] > high)
+          high = numbers[counterb];
+    }
+    return 0;
+}
+
+///this function will display all the data to the user
+int displayData(int numbers[],double average,int lowest,int highest)
+{
+    int i;
+
+    for (i=0; i < SIZE; i++)
+    {
+        cout << numbers[i] << endl;
+    }
+
+    cout << "The average is " << average << "." << endl;
+    cout << "The lowest is " << lowest << "." << endl;
+    cout << "The highest is " << highest << "." << endl;
+    return 0;
+}
