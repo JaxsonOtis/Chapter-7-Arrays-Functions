@@ -1,0 +1,129 @@
+///Jaxson Otis/Period 2/This code scores a test
+
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <stdlib.h>
+#include <fstream>
+
+using namespace std;
+///constants
+int const SIZE=20, PASS=70;
+
+///prototypes
+int fillArray(char userAns[], char correctAns[]);
+int checkAns(char userAns[], char correctAns[], int &numCor,int &numInCor, vector<int>& myVector, int &passOrFail, int &percentage);
+int displayData(int numCor,int numInCor, vector<int>& myVector, int passOrFail, int percentage);
+
+///this function decides when each function executes
+int main()
+{
+    char correctAns[SIZE];
+    char userAns[SIZE];
+    vector<int> myVector;
+    int passOrFail=0, percentage;
+
+
+    int numCor=0, numInCor=0;
+
+    fillArray(userAns, correctAns);
+    checkAns(userAns, correctAns, numCor,numInCor, myVector, passOrFail, percentage);
+    displayData(numCor ,numInCor, myVector,passOrFail, percentage);
+
+    return 0;
+}
+
+///this function will fill the array
+int fillArray(char userAns[], char correctAns[])
+{
+    cout << "Please enter the test answers. Ex.'A'" << endl;
+    cout << "Use the capital letters. " << endl;
+
+    for (int i=0; i < SIZE; i++)
+    {
+        cout << i+1 << ". ";
+        cin >> userAns[i];
+    }
+
+    ifstream myfile;
+    myfile.open("correctanswers.txt");
+
+    if(!myfile.is_open())
+        cout << "Error opening file. \n";
+    else
+    {
+        for(int b = 0; b < SIZE; b++)
+        {
+            myfile >> correctAns[b];
+        }
+        myfile.close();
+    }
+
+    return 0;
+}
+
+///this function will check the user's answers
+int checkAns(char userAns[], char correctAns[], int &numCor,int &numInCor, vector<int>& myVector, int &passOrFail, int &percentage)
+{
+    for (int i=0; i <= SIZE; i++)
+    {
+        if (userAns[i] == correctAns[i])
+        {
+            numCor++;
+        }
+       else
+       {
+           myVector.insert(myVector.end(), i);
+           numInCor++;
+       }
+
+    }
+    numInCor -= 1;
+
+    percentage = numCor / SIZE * 100;
+    if (percentage > PASS )
+    {
+        passOrFail = 1;
+    }
+    else
+    {
+        passOrFail = 0;
+    }
+
+  return 0;
+}
+
+///this function will display the data to the user
+int displayData(int numCor,int numInCor, vector<int>& myVector, int passOrFail, int percentage)
+{
+    system("cls");
+
+      if (passOrFail == 1)
+    {
+        cout << "YOU HAVE PASSED!" << endl;
+    }
+    else
+    {
+        cout << "You have failed. Better luck next time" << endl;
+    }
+
+    cout << "Number Correct: " << numCor << endl;
+    cout << "Number Incorrect: " << numInCor << endl;
+    cout << "The percentage was: " << percentage << endl;
+    cout << "Question Numbers that were wrong: ";
+
+    for(int i =1; i < myVector.size(); i++)
+    {
+        if (i==1)
+        {
+            cout << myVector[i];
+
+        }
+       else
+       {
+           cout << ", " << myVector[i] ;
+       }
+    }
+
+return 0;
+}
