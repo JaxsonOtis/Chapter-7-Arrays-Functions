@@ -1,0 +1,70 @@
+///Jaxson Otis/Period 2/This code finds the wages for a company using there id numbers
+
+#include <iostream>
+#include <stdlib.h>
+
+
+using namespace std;
+
+///constants
+int const SIZE = 7;
+
+///prototypes
+int hoursPayRate(int empID[], double hours[], double payRate[]);
+int getWages(double wages[], double hours[], double payRate[]);
+int displayData(int empID[], double wages[]);
+
+///this function decides when the other functions will execute
+int main()
+{
+    int empID[SIZE] = {5658845, 4520125,
+    7895122, 8777541, 8451277, 1302850, 7580489};
+    double hours[SIZE];
+    double payRate[SIZE];
+    double wages[SIZE];
+
+    hoursPayRate(empID, hours, payRate);
+    getWages(wages, hours, payRate);
+    displayData(empID, wages);
+
+    return 0;
+}
+
+///this function gets the hours and wages from the user
+int hoursPayRate(int empID[], double hours[], double payRate[])
+{
+    for (int i=0; i < SIZE; i++)
+    {
+        cout << "Employee: " << empID[i+1] << endl;
+        cout << "Hours: ";
+        cin >> hours[i];
+        cout << "Pay Rate: ";
+        cin >> payRate[i];
+    }
+
+return 0;
+}
+
+///this function will get the employees wages
+int getWages(double wages[], double hours[], double payRate[])
+{
+    for (int i=0;i < SIZE; i++)
+    {
+        wages[i] = hours[i] * payRate[i];
+    }
+
+  return wages[SIZE];
+}
+
+///this function will display the data
+int displayData(int empID[], double wages[])
+{
+    system("cls");
+       for(int i=0; i < SIZE; i++)
+    {
+        cout <<"Employee: " << empID[i] << endl;
+        cout <<"Wage: $" << wages[i] << endl << endl;;
+    }
+
+    return 0;
+}
