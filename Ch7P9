@@ -1,0 +1,100 @@
+///Jaxson Otis/Period 2/This code scores a driving test
+
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <stdlib.h>
+
+using namespace std;
+///constants
+int const SIZE=20, PASS=15;
+
+///prototypes
+int fillArray(char userAns[]);
+int checkAns(char userAns[], char correctAns[], int &numCor,int &numInCor, vector<int>& );
+int displayData(int numCor,int numInCor, vector<int>& );
+
+///this function decides when each function executes
+int main()
+{
+    char correctAns[SIZE] = {'b','d','a','a','c','a','b','a','c','d','b','c','d','a','d','c','c','b','d','a'};
+    char userAns[SIZE];
+    vector<int> myVector;
+
+
+    int numCor=0, numInCor=0;
+
+    fillArray(userAns);
+    checkAns(userAns, correctAns, numCor,numInCor, myVector);
+    displayData(numCor, numInCor, myVector);
+
+    return 0;
+}
+
+///this function will fill the array
+int fillArray(char userAns[])
+{
+    cout << "Please enter the test answers. Ex.'A'" << endl;
+
+    for (int i=0; i < SIZE; i++)
+    {
+        cout << i+1 << ". ";
+        cin >> userAns[i];
+    }
+
+    return 0;
+}
+
+///this function will check the user's answers
+int checkAns(char userAns[], char correctAns[], int &numCor,int &numInCor, vector<int>& myVector )
+{
+    for (int i=0; i < SIZE; i++)
+    {
+        if (userAns[i] == correctAns[i])
+        {
+            numCor++;
+        }
+       else
+       {
+           myVector.insert(myVector.end(), i);
+           numInCor++;
+       }
+
+    }
+
+  return 0;
+}
+
+///this function will display the data to the user
+int displayData(int numCor,int numInCor, vector<int>& myVector )
+{
+    system("cls");
+
+      if (numCor >= PASS)
+    {
+        cout << "YOU HAVE PASSED!" << endl;
+    }
+    else
+    {
+        cout << "You have failed. Better luck next time" << endl;
+    }
+
+    cout << "Number Correct: " << numCor << endl;
+    cout << "Number Incorrect: " << numInCor << endl;
+    cout << "Question Numbers that were wrong: ";
+
+    for(int i =1; i < myVector.size(); i++)
+    {
+        if (i==1)
+        {
+            cout << myVector[i];
+
+        }
+       else
+       {
+           cout << ", " << myVector[i] ;
+       }
+    }
+
+return 0;
+}
